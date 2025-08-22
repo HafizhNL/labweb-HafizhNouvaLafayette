@@ -1,0 +1,39 @@
+#bigbox {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+#childrenbox {
+    /* border: 1px solid #ccc; */
+    border-radius: 10px;
+    max-width: 350px;
+}
+
+#style_1_text {
+    margin: 5px;
+    font-family: calibri;
+    color: #FFA300;
+    font-size: 45px;
+}
+
+#style_1_p {
+    margin-right: 20px; 
+    margin-bottom: 50px;  
+    font-family: calibri;
+    color: gray;
+}
+
+#style_2_p {
+    margin: 5px;
+    font-family: calibri;
+    color: gray;
+}
