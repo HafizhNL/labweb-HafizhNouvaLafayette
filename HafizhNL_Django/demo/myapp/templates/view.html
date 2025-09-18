@@ -11,24 +11,68 @@
     <div class="container">
       <h1>Daftar Mahasiswa</h1>
 
+      <form
+        method="post"
+        action="{% url 'daftar_mahasiswa' %}"
+        style="margin-bottom: 20px"
+      >
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add" />
+
+
+        <input type="text" name="nim" placeholder="NIM" required />
+        <span class="input-group-nama">
+          <input type="text" name="firstname" placeholder="Nama Depan" required class="input-nama" />
+          <input type="text" name="lastname" placeholder="Nama Belakang" required class="input-nama" />
+        </span>
+        <input type="text" name="jurusan" placeholder="Jurusan" required />
+
+        <button type="submit">Add</button>
+      </form>
+
       <table class="table">
         <thead>
           <tr>
             <th>NIM</th>
             <th>Nama</th>
             <th>Jurusan</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           {% for m in mymahasiswa %}
+
           <tr>
-            <td>{{ m.nim|default:"-" }}</td>
-            <td>{{ m.firstname }} {{ m.lastname }}</td>
-            <td><span class="badge">{{ m.jurusan|default:"-" }}</span></td>
+            <form method="post" action="{% url 'daftar_mahasiswa' %}">
+              {% csrf_token %}
+              <td>
+                <input type="hidden" name="id" value="{{ m.id }}" />
+                <input type="text" name="nim" value="{{ m.nim }}" />
+              </td>
+              <td>
+                <span class="input-group-nama">
+                  <input type="text" name="firstname" value="{{ m.firstname }}" class="input-nama" />
+                  <input type="text" name="lastname" value="{{ m.lastname }}" class="input-nama" />
+                </span>
+              </td>
+              <td>
+                <input type="text" name="jurusan" value="{{ m.jurusan }}" />
+              </td>
+              <td>
+                <input type="hidden" name="action" value="update" />
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+                <form method="post" action="{% url 'daftar_mahasiswa' %}" style="display: inline">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="delete" />
+                  <input type="hidden" name="id" value="{{ m.id }}" />
+                  <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+              </td>
           </tr>
           {% empty %}
           <tr>
-            <td colspan="3">Belum ada data.</td>
+            <td colspan="4">Belum ada data.</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -36,5 +80,5 @@
 
       <p class="footer">Contoh styling sederhana dengan static files Django.</p>
     </div>
- </body>
+  </body>
 </html>
